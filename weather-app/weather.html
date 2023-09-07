@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="w-screen h-screen bg-neutral-800  flex items-center justify-center">
+    <main
+        class="md:max-h-[90%] w-full h-full bg-gradient-to-r from-indigo-600 to-blue-400  max-w-[400px] rounded-lg shadow-lg p-10">
+        <div class="flex item-center gap-5">
+            <input id="city" placeholder="Find city"
+                class="w-full rounded-full px-5 text-neutral-900 bg-neutral-50 outline-blue-900" type="text">
+            <button id="btn" class=" text-blue-500 rounded-full bg-neutral-50 p-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </button>
+        </div>
+
+        <h1 id="load" class="text-lg text-center font-medium text-neutral-50 mt-10 hidden">Loading ...</h1>
+        <h1 id="error"
+            class="text-lg font-medium text-center bg-red-500 px-5 py-2 text-neutral-50 rounded-full bg-opacity-70 mt-10 hidden">
+            City Not Found</h1>
+        <div id="info" class="text-neutral-50 flex flex-col items-center h-full hidden">
+            <img id="gambar" class="h-[150px] mt-5" src="./images/rain.png" alt="rain">
+            <h1 id="suhu" class="text-5xl font-bold ">22° C</h1>
+            <h2 id="kota" class="text-3xl font-medium mt-5">Jakarta</h2>
+
+            <div class="flex items-center justify-between w-full mt-20">
+                <div class="flex items-center gap-2">
+                    <img class="h-[30px]" src="./images/humidity.png" alt="humidity">
+                    <div>
+                        <h1 id="humidity" class="font-medium text-xl">50%</h1>
+                        <h1>Humidity</h1>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <img class="h-[30px]" src="./images/wind.png" alt="humidity">
+                    <div>
+                        <h1 id="wind" class="font-medium text-xl">50 km/h</h1>
+                        <h1>Wind Speed</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const API_KEY = "f440f5c3f114c15a7d481a9c07b2c976"
+        const API_URL = "https://api.openweathermap.org/data/2.5/weather?units=metric"
+
+        const city = document.querySelector("#city")
+        const btn = document.querySelector("#btn")
+        const load = document.querySelector("#load")
+        const info = document.querySelector("#info")
+        const error = document.querySelector("#error")
+
+        const checkWeather = async (kota) => {
+            info.classList.add("hidden")
+            error.classList.add("hidden")
+            load.classList.remove("hidden")
+
+
+            const response = await fetch(API_URL + `&q=${kota}` + `&appid=${API_KEY}`)
+            const data = await response.json()
+
+
+            if (data.cod !== "404") {
+                load.classList.add("hidden")
+                info.classList.remove("hidden")
+
+                const gambar = document.querySelector("#gambar")
+                if (data.weather[0].main === "Clear") {
+                    gambar.src = "./images/clear.png"
+                } else if (data.weather[0].main === "Clouds") {
+                    gambar.src = "./images/clouds.png"
+                } else if (data.weather[0].main === "Drizzle") {
+                    gambar.src = "./images/drizzle.png"
+                } else if (data.weather[0].main === "Mist") {
+                    gambar.src = "./images/mist.png"
+                } else if (data.weather[0].main === "Rain") {
+                    gambar.src = "./images/rain.png"
+                } else if (data.weather[0].main === "Snow") {
+                    gambar.src = "./images/snow.png"
+                }
+
+                document.querySelector("#kota").innerHTML = data.name
+                document.querySelector("#suhu").innerHTML = Math.round(data.main.temp) + "° C"
+                document.querySelector("#humidity").innerHTML = data.main.humidity + "%"
+                document.querySelector("#wind").innerHTML = data.wind.speed + " km/h"
+            } else {
+                load.classList.add("hidden")
+                error.classList.remove("hidden")
+            }
+
+        }
+
+        btn.addEventListener("click", () => {
+            checkWeather(city.value)
+        })
+
+        city.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault()
+                btn.click()
+            }
+        })
+
+    </script>
+</body>
+
+</html>

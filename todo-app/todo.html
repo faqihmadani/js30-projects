@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="w-screen h-screen bg-gradient-to-tr from-green-400 to-sky-300 flex items-center justify-center">
+    <main class="bg-neutral-50 shadow-lg w-8/12 lg:w-6/12 p-5">
+        <h1 class="text-3xl font-bold">Todo List</h1>
+        <div class="flex items-center mt-5 gap-3">
+            <input id="todo" placeholder="Write To Do List"
+                class="w-full px-5 py-2 border-2 border-neutral-400 text-neutral-900 bg-neutral-50 outline-green-500"
+                type="text">
+            <button onclick="addTodo()" id="btn"
+                class=" text-neutral-50 bg-green-500 border-2 border-green-500 px-5 py-2 font-medium">
+                Add
+            </button>
+        </div>
+        <ul id="container" class="flex flex-col gap-3 mt-5 px-1 ">
+            <!-- <li class="flex items-center gap-2 text-lg font-medium">
+                <div id="unchecked" class="h-6 w-6 rounded-full border-2 border-neutral-400"></div>
+                <div id="checked"
+                    class="p-1 hidden bg-green-500 rounded-full border-2 border-green-500 text-neutral-50">
+                    <svg class="h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="3.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                </div>
+                List 1
+            </li> -->
+        </ul>
+
+    </main>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
