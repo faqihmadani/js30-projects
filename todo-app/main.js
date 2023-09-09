@@ -42,7 +42,6 @@ const addTodo = () => {
 }
 
 container.addEventListener("click", (e) => {
-    console.log(e.target.tagName);
     if (e.target.id === "unchecked") {
         const checked = e.target.nextElementSibling
         checked.classList.remove("hidden")

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<body class="bg-gradient-to-tr from-green-400 to-yellow-400 flex w-full h-screen overflow-x-hidden">
+    <main class="container mx-auto">
+        <div class="bg-neutral-50 rounded-lg py-8 px-5 flex items-center mt-8">
+            <img class="h-10" src="./images/notes.svg" alt="notes">
+            <h1 class="text-2xl font-bold ml-3">Note App</h1>
+            <button id="open-pop-up"
+                class="bg-green-400 p-4 rounded-lg ml-auto font-medium hover:shadow-lg transition-all duration-300"><span
+                    class="font-black">+</span>
+                Add Note</button>
+        </div>
+
+        <div id="note-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+            <!-- <div class="bg-neutral-50 p-5 rounded-xl">
+                <div class="mb-5 flex items-center justify-between">
+                    <h1 class="text-2xl font-bold" id="title-card">Catatan</h1>
+                    <button class="p-4 transition-all duration-200 rounded-full bg-neutral-50 hover:bg-neutral-200">
+                        <img class="h-5" src="./images/edit.svg" alt="edit">
+                    </button>
+                </div>
+                <p id="msg-card">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta pariatur officiis
+                    ullam, eaque eveniet ex!</p>
+            </div> -->
+
+        </div>
+
+    </main>
+    <div id="pop-up" class="absolute hidden flex items-center justify-center h-full w-full top-0 left-0">
+        <div id="dark" class="absolute bg-neutral-900/75 h-full w-full top-0 left-0"></div>
+        <div class="bg-neutral-50 z-10 w-11/12 md:w-10/12 lg:w-7/12 rounded-xl flex flex-col gap-5 p-5">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold">Note</h1>
+                <button id="close" class="transition-all duration-300 text-red-400 hover:text-red-500 rounded-full">
+                    <svg class="h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="text-sm text-neutral-700 font-medium" for="title">Title</label>
+                <input class="outline-2 border-2 rounded-lg p-2 border-green-300 outline-green-400" id="title"
+                    type="text">
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-sm text-neutral-700 font-medium" for="message">Message</label>
+                <textarea class="outline-2 border-2 rounded-lg p-2 border-green-300 outline-green-400" name="message"
+                    id="message" cols="30" rows="10"></textarea>
+            </div>
+            <button id="add"
+                class="bg-green-400 hidden py-3 px-12 rounded-lg ml-auto font-medium hover:shadow-lg transition-all duration-300">
+                Add</button>
+            <div class="flex justify-between items-center">
+                <button id="delete"
+                    class="bg-red-400 hidden py-3 px-12 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                    Delete</button>
+                <button id="save"
+                    class="bg-green-400 hidden py-3 px-12 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                    Save</button>
+            </div>
+
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
