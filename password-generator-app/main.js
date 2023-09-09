@@ -28,11 +28,46 @@ const generatePassword = (length, hasNumber, hasSymbol, hasLowercase, hasUpperca
         ...(hasUppercase ? uppercaseAlphabets : []),
     ]
 
-    let pw = "";
+    const checkPassword = (password, hasNumber, hasSymbol, hasLowercase, hasUppercase) => {
+        const arrayPw = password.split("")
+        let result = true
+        if (hasNumber) {
+            if (result) {
+                result = arrayPw.some((a) => numbers.join().split(",").includes(a))
+            }
+        }
 
-    for (let i = 0; i < length; i++) {
-        const index = Math.floor(Math.random() * allCharacters.length)
-        pw += allCharacters[index]
+        if (hasSymbol) {
+            if (result) {
+                result = arrayPw.some((a) => symbols.includes(a))
+            }
+        }
+
+        if (hasLowercase) {
+            if (result) {
+                result = arrayPw.some((a) => lowercaseAlphabets.includes(a))
+            }
+        }
+
+        if (hasUppercase) {
+            if (result) {
+                result = arrayPw.some((a) => uppercaseAlphabets.includes(a))
+            }
+        }
+
+        return result
+    }
+
+    let pw = "";
+    let finished = false
+
+    while (!finished) {
+        pw = ""
+        for (let i = 0; i < length; i++) {
+            const index = Math.floor(Math.random() * allCharacters.length)
+            pw += allCharacters[index]
+        }
+        finished = checkPassword(pw, hasNumber, hasSymbol, hasLowercase, hasUppercase)
     }
 
     return pw;
